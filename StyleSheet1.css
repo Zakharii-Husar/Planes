@@ -1,0 +1,26 @@
+﻿html, body {
+   height: 100%;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+#container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#canvas {
+    height: auto;
+    width: 80%;
+}
+
+@media only screen and (max-width: 1000px) {
+    #canvas {
+        width: 100%;
+    }
+}
