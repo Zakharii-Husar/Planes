@@ -3,10 +3,10 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 const player = {
-    x: 126,
+    x: 94,
     y: 100,
-    w: 126,
-    h: 39,
+    w: 94,
+    h: 30,
     speed: 3,
     degrees: 0,
     dx: 2,
@@ -16,45 +16,24 @@ const player = {
 const computer = {
     x: canvas.width,
     y: 100,
-    w: 126,
-    h: 39,
+    w: 94,
+    h: 30,
     speed: 5,
     degrees: 0,
     dx: 0,
     dy: 0
 };
 
-const barn = {
-    x: canvas.width / 2 - 174,
-    y: 300,
-    w: 348,
-    h: 150
-};
-
 
 const bullet = {
-    w: 20,
-    h: 10,
-    speed: 10
+    w: 10,
+    h: 5,
+    speed: 40
 };
 
 let bulletArr = [];
 
 
-
-const backGround = () => {
-    let skyGrass = new Image();
-    skyGrass.src = "img/1.jpg";
-    skyGrass.onload = () => {
-        ctx.drawImage(skyGrass, 0, 0, 852, 480);
-    };
-    let barnPic = new Image();
-    barnPic.src = "img/hang.png";
-    barnPic.onload = () => {
-        ctx.drawImage(barnPic, barn.x, barn.y, barn.w, barn.h);
-        
-    };
-};
 
 //CREATING PLAYER'S AND COMPUTER'S PLANES WITH ABILITY TO ROTATE
 
@@ -62,6 +41,7 @@ const planesPosition = () => {
     let plane1 = new Image();
     plane1.src = "img/plane1.png";
     plane1.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.save();
         ctx.translate(player.x - player.w / 2, player.y - player.h / 2);
         ctx.rotate(player.degrees * Math.PI / 180.0);
@@ -85,7 +65,7 @@ const planesPosition = () => {
 // CREATING BULLETS
 
 class Shot {
-    constructor(w, h, x, y, dx, dy, degrees) {
+    constructor(w, h, x, y, dx, dy, degrees, target) {
         this.w = w;
         this.h = h;
         this.x = x;
@@ -93,23 +73,22 @@ class Shot {
         this.dx = dx;
         this.dy = dy;
         this.degrees = degrees;
-        this.speed = bullet.speed;
+        this.target = target;
     }
     update() {
-        this.x += this.dx * this.speed;
-        this.y += this.dy * this.speed;
+        if (this.x >= this.target.x &&
+            this.x <= this.target.x + this.target.w &&
+            this.y >= this.target.y &&
+            this.y <= this.target.y + this.target.h) {
+            console.log("hit");
+        }
+        this.x += this.dx * bullet.speed;
+        this.y += this.dy * bullet.speed;
     }
     draw() {
         let bulletPic = new Image();
         bulletPic.src = "img/bullet.png";
         bulletPic.onload = () => {
-            //ctx.save();
-            //ctx.translate(player.x - player.w / 2, player.y - player.h / 2);
-            //ctx.rotate(bullet.degrees * Math.PI / 180.0);
-            //ctx.translate(-player.x - player.w / 2, -player.y - player.h / 2);
-            //ctx.drawImage(bulletPic, bullet.x, bullet.y, bullet.w, bullet.h);
-            //ctx.restore();
-
             ctx.save();
             ctx.translate(this.x - this.w / 2, this.y - this.h / 2);
             ctx.rotate(this.degrees * Math.PI / 180.0);
@@ -264,18 +243,16 @@ const orientation = (object) => {
     }
 
 
-
-
  // SETTING LIMITATIONS FOR MOVING INSIDE OF THE CANVAS
 
-        if (object.x < -126) {
-            object.x = canvas.width + 126;
+        if (object.x < - 94) {
+            object.x = canvas.width + 94;
         };
         if (object.x > canvas.width + object.w) {
-            object.x = -126;
+            object.x = -94;
         };
-        if (object.y < 39) {
-            object.y = 39
+        if (object.y < 30) {
+            object.y = 30
         }
 
 
@@ -342,11 +319,10 @@ const crash = (object) => {
 // CONDITIONS TO CONSIDER PLANE CRASHED
 
 const colisionDetection = (object) => {
-    if (object.y > 400) { crash(object) }
+    if (object.y > 300) { crash(object) }
     else if (
-        object.x > barn.x + 80 && object.x < barn.x + barn.w && object.y > barn.y) { crash(object) };
+        object.x > 200 && object.x < 500 && object.y > 280) { crash(object) };
 };
-
 // MANUAL CONTROL
 
 const speedUp = (object) => {
@@ -366,7 +342,17 @@ const moveLeft = (object) => {
 };
 
 function playerShooting() {
-    bulletArr.push(new Shot(player.w, player.h, player.x, player.y, player.dx, player.dy, player.degrees))
+    bulletArr.push(new Shot(
+        player.w,
+        player.h,
+        player.x,
+        player.y,
+        player.dx,
+        player.dy,
+        player.degrees,
+        computer));
+        setTimeout(function () { bulletArr.shift() }, 1000);
+  
 }
 
 const keyDown = (e) => {
@@ -395,7 +381,6 @@ const keyUp = (e) => {
         e.key === "ArrowDown" || e.key === "Down" ||
         e.key === "ArrowUp" || e.key === "Up" || e.key === " ") {
 
-        setTimeout(function () { fuse = 0; bullet.dx = 0; bullet.dy = 0; }, 1000)
     }
 };
 
@@ -486,24 +471,21 @@ console.log(bulletArr)
 
 //ANIMATION
 
-const drawing = () => {
+const animating = () => {
     autopilot();
-    backGround();
     planesPosition();
     orientation(player);
     orientation(computer);
     colisionDetection(player);
     colisionDetection(computer);
-    if (bulletArr !== 0) {
-        for (let i = 0; i < bulletArr.length; i++) {
+    for (let i = 0; i < bulletArr.length; i++) {
             bulletArr[i].update();
             bulletArr[i].draw();
         }
-    }
-    requestAnimationFrame(drawing);
+    requestAnimationFrame(animating);
 };
 
-drawing();
+animating();
 
 
 document.addEventListener("keyup", keyUp);

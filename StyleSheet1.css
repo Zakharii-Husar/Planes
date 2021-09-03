@@ -1,5 +1,6 @@
 ﻿html, body {
    height: 100%;
+   background-color: white;
 }
 * {
     box-sizing: border-box;
@@ -13,10 +14,18 @@
     flex-direction: row;
     justify-content: space-around;
 }
-
 #canvas {
     height: auto;
     width: 80%;
+    background-image: url("img/background.jpg");
+    background-size: 100% 100%;
+}
+
+#hangar{
+    width: 30%;
+    height: 15%;
+    position: absolute;
+    bottom: 50%;
 }
 
 @media only screen and (max-width: 1000px) {
