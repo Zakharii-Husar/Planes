@@ -423,9 +423,10 @@ document.addEventListener("keydown", keyDown);
 //SENSOR
 
 const fireBtn = document.getElementById("fire");
-fireBtn.addEventListener("click", playerShooting);
+fireBtn.dispatchEvent(new KeyboardEvent("keydown", {"key":" "}))
+//fireBtn.addEventListener("click", playerShooting);
 const leftBtn = document.getElementById("left");
-leftBtn.addEventListener("mousedown", moveLeft);
+leftBtn.addEventListener("click", moveLeft);
 const rightBtn = document.getElementById("right");
 rightBtn.addEventListener("click", moveRight)
 
