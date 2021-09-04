@@ -2,7 +2,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let rotationRate;
-
+console.log(rotationRate)
 const player = {
     x: 94,
     y: 100,
@@ -562,7 +562,7 @@ const autopilot = () => {
 //ANIMATION
 
 const animating = () => {
-    if (rotationRate !== 0) {
+    if (rotationRate) {
         phonePosition();
     }
     textContent();
