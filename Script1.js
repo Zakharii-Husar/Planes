@@ -562,7 +562,7 @@ const autopilot = () => {
 //ANIMATION
 
 const animating = () => {
-    if (rotationRate) {
+    if (rotationRate !== undefined) {
         phonePosition();
     }
     textContent();
