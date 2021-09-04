@@ -418,7 +418,7 @@ const keyDown = (e) => {
 
 document.addEventListener("keydown", keyDown);
 
-//MOBILE CONTROL
+//MOBILE CONTRO
 
 let rotationRate;
 
