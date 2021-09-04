@@ -424,8 +424,7 @@ const container = document.getElementById("container");
 
 
 const fireBtn = document.getElementById("fire");
-fireBtn.addEventListener("click", () => { container.requestFullscreen(); });
-window.screen.orientation.lock('landscape');
+fireBtn.addEventListener("click", () => { container.requestFullscreen(); window.screen.orientation.lock('landscape-secondary');});
 
 const phonePosition = () => {
 
