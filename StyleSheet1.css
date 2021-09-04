@@ -11,12 +11,13 @@
 
 #container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
 }
 #canvas {
     height: auto;
-    width: 80%;
+    width: 100%;
     background-image: url("img/background.jpg");
     background-size: 100% 100%;
 }
@@ -28,8 +29,36 @@
     bottom: 50%;
 }
 
+#topPanel{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#botomPanel {
+    display: flex;
+    flex-direction: row;
+}
+
+#left, #right{
+    width: 20%;
+    height: 70%;
+}
+
+#fire{
+    position: absolute;
+    right: 0;
+}
 @media only screen and (max-width: 1000px) {
-    #canvas {
+    #container {
         width: 100%;
+    }
+}
+
+
+
+@media(orientation: landscape){
+    body{
+
     }
 }

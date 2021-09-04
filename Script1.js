@@ -7,10 +7,11 @@ const player = {
     y: 100,
     w: 94,
     h: 30,
-    speed: 3,
+    speed: 5,
     degrees: 0,
     dx: 2,
-    dy: 0
+    dy: 0,
+    health: 100
 };
 
 const computer = {
@@ -21,23 +22,37 @@ const computer = {
     speed: 5,
     degrees: 0,
     dx: 0,
-    dy: 0
+    dy: 0,
+    health: 100
 };
 
-
-const bullet = {
+const playerBullet = {
     w: 10,
     h: 5,
     speed: 40
 };
 
-let bulletArr = [];
+const computerBullet = {
+    w: 0,
+    h: 0,
+    speed: 40,
+    invisibleBulletSpeed: 40000
+};
 
+let playersBulletArr = [];
+let computersBulletArr = [];
 
+const textContent = () => {
+    const playerHealth = document.getElementById("playerHealth");
+    playerHealth.textContent = `PLAYER: ${player.health}`;
+
+    const computerHealth = document.getElementById("computerHealth");
+    computerHealth.textContent = `ENEMY: ${computer.health}`;
+}
 
 //CREATING PLAYER'S AND COMPUTER'S PLANES WITH ABILITY TO ROTATE
 
-const planesPosition = () => {
+const drawingPlanes = () => {
     let plane1 = new Image();
     plane1.src = "img/plane1.png";
     plane1.onload = () => {
@@ -65,7 +80,7 @@ const planesPosition = () => {
 // CREATING BULLETS
 
 class Shot {
-    constructor(w, h, x, y, dx, dy, degrees, target) {
+    constructor(w, h, x, y, dx, dy, degrees, target, bulletW, bulletH, bulletSpeed) {
         this.w = w;
         this.h = h;
         this.x = x;
@@ -74,26 +89,42 @@ class Shot {
         this.dy = dy;
         this.degrees = degrees;
         this.target = target;
+        this.bulletW = bulletW;
+        this.bulletH = bulletH;
+        this.bulletSpeed = bulletSpeed;
     }
     update() {
         if (this.x >= this.target.x &&
             this.x <= this.target.x + this.target.w &&
             this.y >= this.target.y &&
             this.y <= this.target.y + this.target.h) {
-            console.log("hit");
+            this.target.health -= 1;
+            computerBullet.w = 10;
+            computerBullet.h = 5;
+            computerBullet.speed = 40;
         }
-        this.x += this.dx * bullet.speed;
-        this.y += this.dy * bullet.speed;
+        else {
+            computerBullet.w = 0;
+            computerBullet.h = 0;
+            computerBullet.speed = computerBullet.invisibleBulletSpeed;
+        }
+        this.x += this.dx * this.bulletSpeed;
+        this.y += this.dy * this.bulletSpeed;
     }
     draw() {
         let bulletPic = new Image();
-        bulletPic.src = "img/bullet.png";
+        if (this.target == computer) {
+            bulletPic.src = "img/bullet.png";
+        }
+        else {
+            bulletPic.src = "img/bullet2.png";
+        }
         bulletPic.onload = () => {
             ctx.save();
             ctx.translate(this.x - this.w / 2, this.y - this.h / 2);
             ctx.rotate(this.degrees * Math.PI / 180.0);
             ctx.translate(- this.x - this.w / 2, - this.y - this.h / 2);
-            ctx.drawImage(bulletPic, this.x + this.w, this.y + this.h / 2, bullet.w, bullet.h);
+            ctx.drawImage(bulletPic, this.x + this.w, this.y + this.h / 2, this.bulletW, this.bulletH);
             ctx.restore();
         }
     }
@@ -282,11 +313,12 @@ let frameIndex = 0;
 const crash = (object) => {
         if (counter > 12) { frameIndex += 1; counter = 0 };
         let sprite = new Image();
-        sprite.src = "img/explosion1.png";
+        sprite.src = "img/explosion.png";
     counter += 1;
     object.dx = 0;
     object.dy = 0;
-
+    computerBullet.w = 0;
+    computerBullet.h = 0;
 
         ctx.drawImage(
             sprite,
@@ -300,7 +332,7 @@ const crash = (object) => {
             98.5,
         );
 
-// RESTORE planesPosition AFTER CRASH
+// RESTORE PLANES AFTER CRASH
 
     setTimeout(() => {
         if (object === player) {
@@ -308,6 +340,7 @@ const crash = (object) => {
         } else {
             object.x = canvas.width + 126
         };
+        object.health = 100;
         object.y = 100;
         object.speed = 3;
         object.degrees = 0;
@@ -318,11 +351,14 @@ const crash = (object) => {
 
 // CONDITIONS TO CONSIDER PLANE CRASHED
 
-const colisionDetection = (object) => {
+const crashConditions = (object) => {
     if (object.y > 300) { crash(object) }
     else if (
-        object.x > 200 && object.x < 500 && object.y > 280) { crash(object) };
-};
+        object.x > 200 && object.x < 500 && object.y > 280) { crash(object) }
+    else if (object.health < 0) {
+        crash(object);
+    }
+}
 // MANUAL CONTROL
 
 const speedUp = (object) => {
@@ -341,8 +377,8 @@ const moveLeft = (object) => {
     object.degrees -= object.speed;
 };
 
-function playerShooting() {
-    bulletArr.push(new Shot(
+const playerShooting = () => {
+    playersBulletArr.push(new Shot(
         player.w,
         player.h,
         player.x,
@@ -350,10 +386,31 @@ function playerShooting() {
         player.dx,
         player.dy,
         player.degrees,
-        computer));
-        setTimeout(function () { bulletArr.shift() }, 1000);
+        computer,
+        playerBullet.w,
+        playerBullet.h,
+        playerBullet.speed));
+        setTimeout(function () { playersBulletArr.shift() }, 1000);
   
-}
+};
+
+const computerShooting = () => {
+    computersBulletArr.push(new Shot(
+        computer.w,
+        computer.h,
+        computer.x - 40,
+        computer.y,
+        computer.dx,
+        computer.dy,
+        computer.degrees,
+        player,
+        computerBullet.w,
+        computerBullet.h,
+        computerBullet.speed));
+    setTimeout(function () { computersBulletArr.shift() }, 1000);
+
+};
+
 
 const keyDown = (e) => {
     if (e.key === "ArrowRight" || e.key === "Right") {
@@ -465,23 +522,29 @@ const autopilot = () => {
     } else {
         chase();
     }
+
+    computerShooting();
 };
 
-console.log(bulletArr)
 
 //ANIMATION
 
 const animating = () => {
+    textContent();
     autopilot();
-    planesPosition();
+    drawingPlanes();
     orientation(player);
     orientation(computer);
-    colisionDetection(player);
-    colisionDetection(computer);
-    for (let i = 0; i < bulletArr.length; i++) {
-            bulletArr[i].update();
-            bulletArr[i].draw();
-        }
+    crashConditions(player);
+    crashConditions(computer);
+    for (let i = 0; i < playersBulletArr.length; i++) {
+            playersBulletArr[i].update();
+            playersBulletArr[i].draw();
+    };
+    for (let j = 0; j < computersBulletArr.length; j++) {
+        computersBulletArr[j].update();
+        computersBulletArr[j].draw();
+    };
     requestAnimationFrame(animating);
 };
 
