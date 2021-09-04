@@ -2,7 +2,7 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 let rotationRate;
-console.log(rotationRate)
+
 const player = {
     x: 94,
     y: 100,
@@ -45,7 +45,7 @@ let computersBulletArr = [];
 
 const textContent = () => {
     const playerHealth = document.getElementById("playerHealth");
-    playerHealth.textContent = `PLAYER: ${player.health}`;
+    playerHealth.textContent = `: ${rotationRate}`;
 
     const computerHealth = document.getElementById("computerHealth");
     computerHealth.textContent = `ENEMY: ${computer.health}`;
