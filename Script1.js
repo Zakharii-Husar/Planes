@@ -1,6 +1,7 @@
 // JavaScript source code
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+let rotationRate;
 
 const player = {
     x: 94,
@@ -421,8 +422,6 @@ document.addEventListener("keydown", keyDown);
 //MOBILE CONTROL
 const container = document.getElementById("container");
 
-let rotationRate;
-
 
 const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", () => { container.requestFullscreen(); });
@@ -563,7 +562,9 @@ const autopilot = () => {
 //ANIMATION
 
 const animating = () => {
-    phonePosition();
+    if (rotationRate !== 0) {
+        phonePosition();
+    }
     textContent();
     autopilot();
     drawingPlanes();
