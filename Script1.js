@@ -361,7 +361,27 @@ const crashConditions = (object) => {
         crash(object);
     }
 }
+
 // MANUAL CONTROL
+
+const playerShooting = () => {
+    playersBulletArr.push(new Shot(
+        player.w,
+        player.h,
+        player.x,
+        player.y,
+        player.dx,
+        player.dy,
+        player.degrees,
+        computer,
+        playerBullet.w,
+        playerBullet.h,
+        playerBullet.speed));
+    setTimeout(function () { playersBulletArr.shift() }, 1000);
+
+};
+
+//KEYS
 
 const speedUp = (object) => {
     object.speed += 0.1;
@@ -377,40 +397,6 @@ const moveRight = (object) => {
 };
 const moveLeft = (object) => {
     object.degrees -= object.speed;
-};
-
-const playerShooting = () => {
-    playersBulletArr.push(new Shot(
-        player.w,
-        player.h,
-        player.x,
-        player.y,
-        player.dx,
-        player.dy,
-        player.degrees,
-        computer,
-        playerBullet.w,
-        playerBullet.h,
-        playerBullet.speed));
-        setTimeout(function () { playersBulletArr.shift() }, 1000);
-  
-};
-
-const computerShooting = () => {
-    computersBulletArr.push(new Shot(
-        computer.w,
-        computer.h,
-        computer.x - 40,
-        computer.y,
-        computer.dx,
-        computer.dy,
-        computer.degrees,
-        player,
-        computerBullet.w,
-        computerBullet.h,
-        computerBullet.speed));
-    setTimeout(function () { computersBulletArr.shift() }, 1000);
-
 };
 
 
@@ -432,18 +418,48 @@ const keyDown = (e) => {
     }
 };
 
+document.addEventListener("keydown", keyDown);
+
+//SENSOR
+
+const fireBtn = document.getElementById("fire");
+fireBtn.addEventListener("click", playerShooting);
+const leftBtn = document.getElementById("left");
+leftBtn.addEventListener("click", moveLeft(player));
+const rightBtn = document.getElementById("right");
+righttBtn.addEventListener("click", moveRight(player))
+
 //SO FAR USELESS
 
-const keyUp = (e) => {
-    if (e.key === "ArrowRight" || e.key === "Right" ||
-        e.key === "ArrowLeft" || e.key === "Left" ||
-        e.key === "ArrowDown" || e.key === "Down" ||
-        e.key === "ArrowUp" || e.key === "Up" || e.key === " ") {
+//const keyUp = (e) => {
+//    if (e.key === "ArrowRight" || e.key === "Right" ||
+//        e.key === "ArrowLeft" || e.key === "Left" ||
+//        e.key === "ArrowDown" || e.key === "Down" ||
+//        e.key === "ArrowUp" || e.key === "Up" || e.key === " ") {
 
-    }
-};
+//    }
+//};
+
+//document.addEventListener("keyup", keyUp);
 
 // COMPUTER CONTROL
+
+const computerShooting = () => {
+    computersBulletArr.push(new Shot(
+        computer.w,
+        computer.h,
+        computer.x - 40,
+        computer.y,
+        computer.dx,
+        computer.dy,
+        computer.degrees,
+        player,
+        computerBullet.w,
+        computerBullet.h,
+        computerBullet.speed));
+    setTimeout(function () { computersBulletArr.shift() }, 1000);
+
+};
 
 const autopilot = () => {
 
@@ -551,7 +567,3 @@ const animating = () => {
 };
 
 animating();
-
-
-document.addEventListener("keyup", keyUp);
-document.addEventListener("keydown", keyDown);
