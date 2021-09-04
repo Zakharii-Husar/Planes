@@ -2,12 +2,6 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-let rotationRate;
-
-window.addEventListener("deviceorientation", function (event) {
-    rotationRate = event.alpha// process  event.beta and event.gamma
-}, true);
-
 const player = {
     x: 94,
     y: 100,
@@ -53,7 +47,7 @@ const textContent = () => {
     playerHealth.textContent = `PLAYER: ${player.health}`;
 
     const computerHealth = document.getElementById("computerHealth");
-    computerHealth.textContent = `ENEMY: ${rotationRate}`;
+    computerHealth.textContent = `ENEMY: ${computer.health}`;
 }
 
 //CREATING PLAYER'S AND COMPUTER'S PLANES WITH ABILITY TO ROTATE
@@ -424,14 +418,24 @@ const keyDown = (e) => {
 
 document.addEventListener("keydown", keyDown);
 
-//SENSOR
+//MOBILE CONTROL
+
+let rotationRate;
+
+window.addEventListener("deviceorientation", function (event) {
+    rotationRate = event.alpha// process  event.beta and event.gamma
+}, true);
 
 const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", playerShooting);
-const leftBtn = document.getElementById("left");
-leftBtn.addEventListener("click", moveLeft);
-const rightBtn = document.getElementById("right");
-rightBtn.addEventListener("click", moveRight)
+
+if (rotationRate > 0 && rotationRate < 180) {
+    moveLeft();
+}
+else {
+    moveRight();
+}
+
 
 //SO FAR USELESS
 
@@ -446,7 +450,7 @@ rightBtn.addEventListener("click", moveRight)
 
 //document.addEventListener("keyup", keyUp);
 
-// COMPUTER CONTROL
+// BOT'S CONTROL
 
 const computerShooting = () => {
     computersBulletArr.push(new Shot(
