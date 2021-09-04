@@ -383,35 +383,35 @@ const playerShooting = () => {
 
 //KEYS
 
-const speedUp = (object) => {
-    object.speed += 0.1;
+const speedUp = () => {
+    player.speed += 0.1;
 
 };
-const speedDown = (object) => {
-    object.speed -= 0.1;
+const speedDown = () => {
+    player.speed -= 0.1;
 };
 
-const moveRight = (object) => {
-    object.degrees += object.speed;
+const moveRight = () => {
+    player.degrees += player.speed;
 
 };
-const moveLeft = (object) => {
-    object.degrees -= object.speed;
+const moveLeft = () => {
+    player.degrees -= player.speed;
 };
 
 
 const keyDown = (e) => {
     if (e.key === "ArrowRight" || e.key === "Right") {
-        moveRight(player);
+        moveRight();
     };
     if (e.key === "ArrowLeft" || e.key === "Left") {
-        moveLeft(player);
+        moveLeft();
     };
     if (e.key === "ArrowDown" || e.key === "Down") {
-        speedDown(player);
+        speedDown();
     };
     if (e.key === "ArrowUp" || e.key === "Up") {
-        speedUp(player);
+        speedUp();
     };
     if (e.key === " ") {
         playerShooting();
@@ -425,9 +425,9 @@ document.addEventListener("keydown", keyDown);
 const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", playerShooting);
 const leftBtn = document.getElementById("left");
-leftBtn.addEventListener("click", moveLeft(player));
+leftBtn.addEventListener("click", moveLeft);
 const rightBtn = document.getElementById("right");
-rightBtn.addEventListener("click", moveRight(player))
+rightBtn.addEventListener("click", moveRight)
 
 //SO FAR USELESS
 
