@@ -561,9 +561,7 @@ const autopilot = () => {
 //ANIMATION
 
 const animating = () => {
-    if (rotationRate !== undefined) {
         phonePosition();
-    }
     textContent();
     autopilot();
     drawingPlanes();
