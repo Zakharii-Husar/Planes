@@ -38,7 +38,7 @@ const computerBullet = {
     w: 0,
     h: 0,
     speed: 40,
-    invisibleBulletSpeed: 40000
+    invisibleBulletSpeed: 4000
 };
 
 let playersBulletArr = [];
