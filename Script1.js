@@ -423,20 +423,25 @@ const container = document.getElementById("container");
 
 let rotationRate;
 
-window.addEventListener("deviceorientation", function (event) {
-    rotationRate = event.alpha// process  event.beta and event.gamma
-}, true);
 
 const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", () => { container.requestFullscreen(); });
 window.screen.orientation.lock('landscape');
 
-if (rotationRate > 0 && rotationRate < 180) {
-    moveLeft();
+const phonePosition = () => {
+
+    window.addEventListener("deviceorientation", function (event) {
+        rotationRate = event.alpha// process  event.beta and event.gamma
+    }, true);
+
+    if (rotationRate > 0 && rotationRate < 180) {
+        moveLeft();
+    }
+    else {
+        moveRight();
+    }
 }
-else {
-    moveRight();
-}
+
 
 
 //SO FAR USELESS
@@ -558,6 +563,7 @@ const autopilot = () => {
 //ANIMATION
 
 const animating = () => {
+    phonePosition();
     textContent();
     autopilot();
     drawingPlanes();
