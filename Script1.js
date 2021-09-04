@@ -427,7 +427,7 @@ fireBtn.addEventListener("click", playerShooting);
 const leftBtn = document.getElementById("left");
 leftBtn.addEventListener("click", moveLeft(player));
 const rightBtn = document.getElementById("right");
-righttBtn.addEventListener("click", moveRight(player))
+rightBtn.addEventListener("click", moveRight(player))
 
 //SO FAR USELESS
 
