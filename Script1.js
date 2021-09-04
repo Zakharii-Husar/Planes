@@ -1,5 +1,5 @@
 // JavaScript source code
-screen.orientation.lock("landscape");
+screen.orientation.lock("landscape-primary");
 
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
