@@ -425,7 +425,7 @@ document.addEventListener("keydown", keyDown);
 const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", playerShooting);
 const leftBtn = document.getElementById("left");
-leftBtn.addEventListener("click", moveLeft);
+leftBtn.addEventListener("touchstart", moveLeft);
 const rightBtn = document.getElementById("right");
 rightBtn.addEventListener("click", moveRight)
 
