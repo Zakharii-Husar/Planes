@@ -1,6 +1,4 @@
 // JavaScript source code
-screen.orientation.lock("landscape-primary");
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -38,7 +36,7 @@ const computerBullet = {
     w: 0,
     h: 0,
     speed: 40,
-    invisibleBulletSpeed: 400
+    invisibleBulletSpeed: 4000
 };
 
 let playersBulletArr = [];
@@ -423,8 +421,7 @@ document.addEventListener("keydown", keyDown);
 //SENSOR
 
 const fireBtn = document.getElementById("fire");
-fireBtn.dispatchEvent(new KeyboardEvent("keydown", {"key":" "}))
-//fireBtn.addEventListener("click", playerShooting);
+fireBtn.addEventListener("click", function () { setTimeout(playerShooting, 500)});
 const leftBtn = document.getElementById("left");
 leftBtn.addEventListener("click", moveLeft);
 const rightBtn = document.getElementById("right");
@@ -503,13 +500,13 @@ const autopilot = () => {
 // PLANE CHASING
 
     const chase = () => {
-        if (player.x <= computer.x) {
+        if (player.x < computer.x) {
             if (computer.dx <= 0) {
                 if (player.y < computer.y) {
-                    computer.degrees += 1;
+                    computer.degrees += 0.5;
                 }
                 else if (player.y > computer.y) {
-                    computer.degrees -= 1;
+                    computer.degrees -= 0.5;
                 }
                 else if (player.y === computer.y) {
                     return
@@ -517,19 +514,19 @@ const autopilot = () => {
             }
             else {
                 if (player.y < computer.y) {
-                    computer.degrees += 1;
+                    computer.degrees += 0.5;
                 }
                 else if (player.y > computer.y) {
-                    computer.degrees -= 1;
+                    computer.degrees -= 0.5;
                 }
             }
         }
         else {
-                if (player.y <= computer.y) {
-                    computer.degrees += 1;
+                if (player.y < computer.y) {
+                    computer.degrees += 0.5;
                 }
                 else {
-                    computer.degrees -= 1;
+                    computer.degrees -= 0.5;
                 }
         }
     }
