@@ -418,7 +418,8 @@ const keyDown = (e) => {
 
 document.addEventListener("keydown", keyDown);
 
-//MOBILE CONTRO
+//MOBILE CONTROL
+const container = document.getElementById("container");
 
 let rotationRate;
 
@@ -427,7 +428,8 @@ window.addEventListener("deviceorientation", function (event) {
 }, true);
 
 const fireBtn = document.getElementById("fire");
-fireBtn.addEventListener("click", playerShooting);
+fireBtn.addEventListener("click", () => { container.requestFullscreen(); });
+window.screen.orientation.lock('landscape');
 
 if (rotationRate > 0 && rotationRate < 180) {
     moveLeft();
