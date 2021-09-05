@@ -432,10 +432,10 @@ const phonePosition = () => {
         rotationRate = event.alpha// process  event.beta and event.gamma
     }, true);
 
-    if (rotationRate > 105) {
+    if (rotationRate > 120) {
         moveLeft();
     }
-    else {
+    else if (rotationRate < 100) {
         moveRight();
     }
 }
