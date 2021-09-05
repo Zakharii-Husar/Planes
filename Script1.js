@@ -1,7 +1,6 @@
 // JavaScript source code
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-let rotationRate;
 
 const player = {
     x: 94,
@@ -426,19 +425,6 @@ const container = document.getElementById("container");
 const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", () => { container.requestFullscreen(); window.screen.orientation.lock('landscape');});
 
-const phonePosition = () => {
-
-    window.addEventListener("deviceorientation", function (event) {
-        rotationRate = event.gamma// process  event.beta and event.gamma
-    }, true);
-
-    if (rotationRate > 120) {
-        moveLeft();
-    }
-    else if (rotationRate < 100) {
-        moveRight();
-    }
-}
 
 
 
@@ -561,7 +547,6 @@ const autopilot = () => {
 //ANIMATION
 
 const animating = () => {
-        phonePosition();
     textContent();
     autopilot();
     drawingPlanes();
