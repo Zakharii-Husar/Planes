@@ -74,6 +74,12 @@
     width: 10%;
 }
 
+#start{
+    position: absolute;
+    top: 50%;
+    right: 50%;
+}
+
 @media (hover: hover) and (pointer: fine) {
     #fire, #left, #right{
         display: none;

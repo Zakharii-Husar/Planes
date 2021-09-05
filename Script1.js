@@ -1,4 +1,5 @@
 // JavaScript source code
+const theGame = () => {
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -423,7 +424,7 @@ const container = document.getElementById("container");
 
 
 const fireBtn = document.getElementById("fire");
-fireBtn.addEventListener("click", () => { container.requestFullscreen(); screen.orientation.lock('landscape');});
+fireBtn.addEventListener("click", playerShooting);
 
 const leftBtn = document.getElementById("left");
 leftBtn.addEventListener("click", moveLeft);
@@ -571,3 +572,18 @@ const animating = () => {
 };
 
 animating();
+}
+
+//MENU
+const fullScreen = () => {
+    container.requestFullscreen(); screen.orientation.lock('landscape')
+};
+
+const start = () => {
+    theGame();
+    fullScreen();
+    startBtn.style.display = "none";
+};
+
+const startBtn = document.getElementById("start");
+startBtn.addEventListener("click", start);
