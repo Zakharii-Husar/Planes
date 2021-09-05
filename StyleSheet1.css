@@ -8,7 +8,7 @@
     padding: 0;
 }
 
-#menu{
+#menuImage{
     position: absolute;
     top: 0;
     width: 100%;
@@ -37,12 +37,12 @@
 }
 
 #topPanel{
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#topPanel *{
+#computerHealth, #playerHealth{
     position: absolute;
     top: 0;
     font-size: large;

@@ -4,9 +4,13 @@ const fireBtn = document.getElementById("fire");
 const leftBtn = document.getElementById("left");
 const rightBtn = document.getElementById("right");
 
+
 const theGame = () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
+
+    const topPanel = document.getElementById("topPanel");
+topPanel.style.display = "flex";
 
 const player = {
     x: 94,
