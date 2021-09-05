@@ -131,7 +131,19 @@ class Shot {
             ctx.restore();
         }
     }
-}
+    };
+
+    const drawBullets = () => {
+        for (let i = 0; i < playersBulletArr.length; i++) {
+            playersBulletArr[i].update();
+            playersBulletArr[i].draw();
+        };
+
+        for (let j = 0; j < computersBulletArr.length; j++) {
+            computersBulletArr[j].update();
+            computersBulletArr[j].draw();
+        };
+    };
 
 
 // CHANGING DIRECTION DEPENDING ON THE ANGLE OF AN OBJECT
@@ -308,7 +320,7 @@ const orientation = (object) => {
     };
 };
 
-// EXPLOSION OF A PLANE IN CASE OF COLISION WITH EARTH OR THE HANGAR
+// EXPLOSION OF PLANES
 
 let counter = 0;
 let frameIndex = 0;
@@ -351,7 +363,8 @@ const crash = (object) => {
 
     setTimeout(() => {
         defaultSettings();
-        frameIndex = 0;}, 1000)
+        frameIndex = 0;
+    }, 1000)
 };
 
 // CONDITIONS TO CONSIDER PLANE CRASHED
@@ -382,7 +395,8 @@ const playerShooting = () => {
         playerBullet.speed));
     setTimeout(function () { playersBulletArr.shift() }, 1000);
 
-};
+    };
+
 
 //KEYS
 
@@ -527,7 +541,7 @@ const autopilot = () => {
 
 // MAKING DESICION BETWEEN CRASH PROTECTION AND CHASING
 
-    if (emergencyHight != 0) {
+    if (emergencyHight !== 0) {
         antiCrash();
     } else {
         chase();
@@ -535,7 +549,6 @@ const autopilot = () => {
 
     computerShooting();
 };
-
 
 //ANIMATION
 
@@ -546,15 +559,8 @@ const autopilot = () => {
     orientation(player);
     orientation(computer);
     crashConditions(player);
-    crashConditions(computer);
-    for (let i = 0; i < playersBulletArr.length; i++) {
-            playersBulletArr[i].update();
-            playersBulletArr[i].draw();
-    };
-    for (let j = 0; j < computersBulletArr.length; j++) {
-        computersBulletArr[j].update();
-        computersBulletArr[j].draw();
-    };
+        crashConditions(computer);
+        drawBullets();
     requestAnimationFrame(animating);
 };
 
