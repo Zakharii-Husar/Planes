@@ -390,11 +390,11 @@ const speedDown = () => {
 };
 
 const moveRight = () => {
-    player.degrees += player.speed;
+    player.degrees += 10;
 
 };
 const moveLeft = () => {
-    player.degrees -= player.speed;
+    player.degrees -= 10;
 };
 
 
