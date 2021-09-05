@@ -56,17 +56,20 @@
 #fire{
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 10%;
+    width: 5%;
 }
 
-#left{
+#left {
     position: absolute;
     bottom: 0;
     left: 0;
+    width: 5%;
 }
 
-#right{
+#right {
     position: absolute;
     bottom: 0;
     left: 20%;
+    width: 5%;
 }
