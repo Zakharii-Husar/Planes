@@ -35,5 +35,16 @@
     justify-content: space-between;
 }
 
+#playerHealth{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#computerHealth {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
 
