@@ -429,7 +429,7 @@ fireBtn.addEventListener("click", () => { container.requestFullscreen(); window.
 const phonePosition = () => {
 
     window.addEventListener("deviceorientation", function (event) {
-        rotationRate = event.alpha// process  event.beta and event.gamma
+        rotationRate = event.beta// process  event.beta and event.gamma
     }, true);
 
     if (rotationRate > 120) {
