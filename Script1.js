@@ -1,7 +1,12 @@
 // JavaScript source code
+
+const fireBtn = document.getElementById("fire");
+const leftBtn = document.getElementById("left");
+const rightBtn = document.getElementById("right");
+
 const theGame = () => {
-const canvas = document.getElementById("canvas");
-const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
 const player = {
     x: 94,
@@ -390,12 +395,12 @@ const speedDown = () => {
     player.speed -= 0.1;
 };
 
-const moveRight = () => {
-    player.degrees += 10;
+    const moveRight = () => {
+        player.degrees += player.speed;
 
 };
-const moveLeft = () => {
-    player.degrees -= 10;
+    const moveLeft = () => {
+        player.degrees -= player.speed;
 };
 
 
@@ -420,16 +425,10 @@ const keyDown = (e) => {
 document.addEventListener("keydown", keyDown);
 
 //MOBILE CONTROL
-const container = document.getElementById("container");
-
-
-const fireBtn = document.getElementById("fire");
 fireBtn.addEventListener("click", playerShooting);
 
-const leftBtn = document.getElementById("left");
 leftBtn.addEventListener("click", moveLeft);
 
-const rightBtn = document.getElementById("right");
 rightBtn.addEventListener("click", moveRight);
 
 
@@ -571,18 +570,19 @@ const animating = () => {
     requestAnimationFrame(animating);
 };
 
-animating();
+    animating();
 }
 
 //MENU
+
 const fullScreen = () => {
     container.requestFullscreen(); screen.orientation.lock('landscape')
 };
 
+
 const start = () => {
     theGame();
     fullScreen();
-    startBtn.style.display = "none";
 };
 
 const startBtn = document.getElementById("start");
