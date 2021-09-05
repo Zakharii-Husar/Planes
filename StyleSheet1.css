@@ -82,7 +82,7 @@
 }
 
 #bottomPanel{
-    display: none;
+    display: flex;
 }
 
 #left {
@@ -101,7 +101,7 @@
 
 
 @media (hover: hover) and (pointer: fine) {
-    #fire, #left, #right{
+    #bottomPanel{
         display: none;
     }
 }

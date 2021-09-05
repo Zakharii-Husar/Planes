@@ -59,8 +59,6 @@ const theGame = () => {
     let computersBulletArr = [];
 
 
-    gameView();
-
 const textContent = () => {
     const playerHealth = document.getElementById("playerHealth");
     playerHealth.textContent = `PLAYER: ${player.health}`;
