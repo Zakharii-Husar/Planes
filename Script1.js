@@ -1,56 +1,65 @@
 // JavaScript source code
 
-const fireBtn = document.getElementById("fire");
-const leftBtn = document.getElementById("left");
-const rightBtn = document.getElementById("right");
+const topPanel = document.getElementById("topPanel");
+const bottomPanel = document.getElementById("bottomPanel");
+
+const menuView = () => {
+    topPanel.style.display = "none";
+    bottomPanel.style.display = "none";
+};
+
+const gameView = () => {
+    topPanel.style.display = "flex";
+    bottomPanel.style.display = "flex";
+};
 
 
 const theGame = () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
-    const topPanel = document.getElementById("topPanel");
-topPanel.style.display = "flex";
+    const player = {
+        x: 94,
+        y: 100,
+        w: 94,
+        h: 30,
+        speed: 5,
+        degrees: 0,
+        dx: 2,
+        dy: 0,
+        health: 100
+    };
 
-const player = {
-    x: 94,
-    y: 100,
-    w: 94,
-    h: 30,
-    speed: 5,
-    degrees: 0,
-    dx: 2,
-    dy: 0,
-    health: 100
-};
+    const computer = {
+        x: canvas.width,
+        y: 100,
+        w: 94,
+        h: 30,
+        speed: 5,
+        degrees: 0,
+        dx: 0,
+        dy: 0,
+        health: 100
+    };
 
-const computer = {
-    x: canvas.width,
-    y: 100,
-    w: 94,
-    h: 30,
-    speed: 5,
-    degrees: 0,
-    dx: 0,
-    dy: 0,
-    health: 100
-};
+    const playerBullet = {
+        w: 10,
+        h: 5,
+        speed: 40
+    };
 
-const playerBullet = {
-    w: 10,
-    h: 5,
-    speed: 40
-};
+    const computerBullet = {
+        w: 0,
+        h: 0,
+        speed: 40,
+        invisibleBulletSpeed: 4000
+    };
 
-const computerBullet = {
-    w: 0,
-    h: 0,
-    speed: 40,
-    invisibleBulletSpeed: 4000
-};
+    let playersBulletArr = [];
+    let computersBulletArr = [];
 
-let playersBulletArr = [];
-let computersBulletArr = [];
+
+    gameView();
 
 const textContent = () => {
     const playerHealth = document.getElementById("playerHealth");
@@ -343,20 +352,22 @@ const crash = (object) => {
         );
 
 // RESTORE PLANES AFTER CRASH
-
-    setTimeout(() => {
+    const defaultSettings = () => {
         if (object === player) {
             object.x = 0;
         } else {
-            object.x = canvas.width + 126
+            object.x = canvas.width + computer.w
         };
         object.health = 100;
         object.y = 100;
-        object.speed = 3;
+        object.speed = 5;
         object.degrees = 0;
         object.dx = 2;
-            frameIndex = 0;
-        }, 1000)
+    };
+
+    setTimeout(() => {
+        defaultSettings();
+        frameIndex = 0;}, 1000)
 };
 
 // CONDITIONS TO CONSIDER PLANE CRASHED
@@ -429,26 +440,15 @@ const keyDown = (e) => {
 document.addEventListener("keydown", keyDown);
 
 //MOBILE CONTROL
+    const fireBtn = document.getElementById("fire");
+    const leftBtn = document.getElementById("left");
+    const rightBtn = document.getElementById("right");
+
 fireBtn.addEventListener("click", playerShooting);
 
 leftBtn.addEventListener("click", moveLeft);
 
 rightBtn.addEventListener("click", moveRight);
-
-
-
-//SO FAR USELESS
-
-//const keyUp = (e) => {
-//    if (e.key === "ArrowRight" || e.key === "Right" ||
-//        e.key === "ArrowLeft" || e.key === "Left" ||
-//        e.key === "ArrowDown" || e.key === "Down" ||
-//        e.key === "ArrowUp" || e.key === "Up" || e.key === " ") {
-
-//    }
-//};
-
-//document.addEventListener("keyup", keyUp);
 
 // BOT'S CONTROL
 
@@ -555,7 +555,7 @@ const autopilot = () => {
 
 //ANIMATION
 
-const animating = () => {
+    const animating = () => {
     textContent();
     autopilot();
     drawingPlanes();

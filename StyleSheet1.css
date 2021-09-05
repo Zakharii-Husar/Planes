@@ -8,6 +8,19 @@
     padding: 0;
 }
 
+#start {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    background-color: green;
+    color: white;
+    padding: 2%;
+    border-radius: 20%;
+    font-size: xx-large;
+    font-weight: 900;
+    transform: translate(50%)
+}
+
 #menuImage{
     position: absolute;
     top: 0;
@@ -36,14 +49,15 @@
     bottom: 50%;
 }
 
-#topPanel{
-    display: none;
+#topPanel {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
+    overflow: hidden;
 }
 
-#computerHealth, #playerHealth{
-    position: absolute;
+#topPanel *{
+    position: relative;
     top: 0;
     font-size: large;
     font-weight: 800;
@@ -67,6 +81,10 @@
     width: 10%;
 }
 
+#bottomPanel{
+    display: none;
+}
+
 #left {
     position: absolute;
     bottom: 0;
@@ -81,11 +99,6 @@
     width: 10%;
 }
 
-#start{
-    position: absolute;
-    top: 50%;
-    right: 50%;
-}
 
 @media (hover: hover) and (pointer: fine) {
     #fire, #left, #right{
