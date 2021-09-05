@@ -44,7 +44,7 @@ let computersBulletArr = [];
 
 const textContent = () => {
     const playerHealth = document.getElementById("playerHealth");
-    playerHealth.textContent = `: ${rotationRate}`;
+    playerHealth.textContent = `PLAYER: ${player.health}`;
 
     const computerHealth = document.getElementById("computerHealth");
     computerHealth.textContent = `ENEMY: ${computer.health}`;
