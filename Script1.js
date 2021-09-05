@@ -423,8 +423,13 @@ const container = document.getElementById("container");
 
 
 const fireBtn = document.getElementById("fire");
-fireBtn.addEventListener("click", () => { container.requestFullscreen(); window.screen.orientation.lock('landscape');});
+fireBtn.addEventListener("click", () => { container.requestFullscreen(); screen.orientation.lock('landscape');});
 
+const leftBtn = document.getElementById("left");
+leftBtn.addEventListener("click", moveLeft);
+
+const rightBtn = document.getElementById("right");
+rightBtn.addEventListener("click", moveRight);
 
 
 
