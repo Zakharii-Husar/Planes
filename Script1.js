@@ -1,19 +1,5 @@
 // JavaScript source code
 
-const topPanel = document.getElementById("topPanel");
-const bottomPanel = document.getElementById("bottomPanel");
-
-const menuView = () => {
-    topPanel.style.display = "none";
-    bottomPanel.style.display = "none";
-};
-
-const gameView = () => {
-    topPanel.style.display = "flex";
-    bottomPanel.style.display = "flex";
-};
-
-
 const theGame = () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
