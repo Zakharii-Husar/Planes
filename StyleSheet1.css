@@ -36,15 +36,21 @@
 }
 
 #playerHealth{
-    position: absolute;
-    top: 0;
     left: 0;
+    background-color: blue;
 }
 
 #computerHealth {
+    right: 0;
+    background-color: red;
+}
+
+#computerHealth, #playerHealth {
     position: absolute;
     top: 0;
-    right: 0;
+    font-size: large;
+    font-weight: 800;
+    color: white;
 }
 
 
