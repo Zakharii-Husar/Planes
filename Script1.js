@@ -442,7 +442,7 @@ document.addEventListener("keydown", keyDown);
     const leftBtn = document.getElementById("left");
     const rightBtn = document.getElementById("right");
 
-    fireBtn.addEventListener("touchmove", playerShooting);
+    fireBtn.addEventListener("touchstart", playerShooting);
 
         leftBtn.addEventListener("click", moveLeft);
 
