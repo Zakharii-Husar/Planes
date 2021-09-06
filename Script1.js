@@ -438,17 +438,23 @@ const keyDown = (e) => {
 document.addEventListener("keydown", keyDown);
 
 //MOBILE CONTROL
-    const fireBtn = document.getElementById("fire");
-    const leftBtn = document.getElementById("left");
-    const rightBtn = document.getElementById("right");
     let trigger = false;
-
-    fireBtn.addEventListener("touchstart", () => { trigger = true });
-    fireBtn.addEventListener("touchend", () => { trigger = false });
-
-        leftBtn.addEventListener("click", moveLeft);
-
-        rightBtn.addEventListener("click", moveRight);
+    let left = false;
+    let right = false;
+    const sensorButtons = () => {
+        const fireBtn = document.getElementById("fire");
+        const leftBtn = document.getElementById("left");
+        const rightBtn = document.getElementById("right");
+        fireBtn.addEventListener("touchstart", () => trigger = true);
+        fireBtn.addEventListener("touchend", () => trigger = false);
+        leftBtn.addEventListener("touchstart", () => left = true);
+        leftBtn.addEventListener("touchend", () => left = false);
+        rightBtn.addEventListener("touchstart", () => right = true);
+        rightBtn.addEventListener("touchend", () => right = false);
+        if (trigger == true) playerShooting();
+        if (left == true) moveLeft();
+        if (right == true) moveRight();
+    };
 // BOT'S CONTROL
 
 const computerShooting = () => {
@@ -554,17 +560,15 @@ const autopilot = () => {
 //ANIMATION
 
     const animating = () => {
-        if (trigger == true) {
-            playerShooting()
-        }
+    sensorButtons();
     textContent();
     autopilot();
     drawingPlanes();
     orientation(player);
     orientation(computer);
     crashConditions(player);
-        crashConditions(computer);
-        drawBullets();
+    crashConditions(computer);
+    drawBullets();
     requestAnimationFrame(animating);
 };
 
