@@ -442,11 +442,11 @@ document.addEventListener("keydown", keyDown);
     const leftBtn = document.getElementById("left");
     const rightBtn = document.getElementById("right");
 
-fireBtn.addEventListener("click", playerShooting);
+    fireBtn.addEventListener("touchmove", playerShooting);
 
-leftBtn.addEventListener("click", moveLeft);
+        leftBtn.addEventListener("click", moveLeft);
 
-rightBtn.addEventListener("click", moveRight);
+        rightBtn.addEventListener("click", moveRight);
 
 // BOT'S CONTROL
 
