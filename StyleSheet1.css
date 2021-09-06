@@ -83,7 +83,7 @@
 
 #bottomPanel{
     display: flex;
-    pointer-events: visible;
+    pointer-events: none;
 }
 
 #left {
