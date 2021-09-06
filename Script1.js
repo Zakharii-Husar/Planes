@@ -454,7 +454,7 @@ document.addEventListener("keydown", keyDown);
 
         rightBtn.addEventListener("click", moveRight);
 
-    fireBtn.addEventListener("touchstart", startShooting);
+    document.addEventListener("touchstart", startShooting);
 // BOT'S CONTROL
 
 const computerShooting = () => {
