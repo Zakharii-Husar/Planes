@@ -442,12 +442,19 @@ document.addEventListener("keydown", keyDown);
     const leftBtn = document.getElementById("left");
     const rightBtn = document.getElementById("right");
 
-    fireBtn.addEventListener("touchstart", playerShooting);
+    
+    const startShooting = (e) => {
+        playerShooting();
+        console.log(e)
+    }
+
+    fireBtn.addEventListener("click", playerShooting);
 
         leftBtn.addEventListener("click", moveLeft);
 
         rightBtn.addEventListener("click", moveRight);
 
+    document.addEventListener("touchstart", startShooting);
 // BOT'S CONTROL
 
 const computerShooting = () => {
