@@ -441,9 +441,10 @@ document.addEventListener("keydown", keyDown);
     const fireBtn = document.getElementById("fire");
     const leftBtn = document.getElementById("left");
     const rightBtn = document.getElementById("right");
+    let trigger = false;
 
-
-    fireBtn.addEventListener("touchstart", playerShooting);
+    fireBtn.addEventListener("touchstart", () => { trigger = true });
+    fireBtn.addEventListener("touchend", () => { trigger = false });
 
         leftBtn.addEventListener("click", moveLeft);
 
@@ -553,6 +554,9 @@ const autopilot = () => {
 //ANIMATION
 
     const animating = () => {
+        if (trigger == true) {
+            playerShooting()
+        }
     textContent();
     autopilot();
     drawingPlanes();
