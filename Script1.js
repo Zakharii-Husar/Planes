@@ -443,7 +443,7 @@ document.addEventListener("keydown", keyDown);
     const rightBtn = document.getElementById("right");
 
 
-    fireBtn.addEventListener("touchcancel", playerShooting);
+    fireBtn.addEventListener("touchstart", playerShooting);
 
         leftBtn.addEventListener("click", moveLeft);
 
