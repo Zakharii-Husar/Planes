@@ -80,8 +80,7 @@
     position: absolute;
     bottom: 10%;
     right: 0;
-    width: 10%;
-    height: 10%;
+background-size: 100%;
 }
 
 #bottomPanel{
