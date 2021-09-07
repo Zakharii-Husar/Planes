@@ -554,7 +554,7 @@ const autopilot = () => {
         chase();
     }
 
-    computerShooting();
+    //computerShooting();
 };
 
 //ANIMATION
