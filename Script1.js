@@ -31,13 +31,13 @@ const theGame = () => {
     const playerBullet = {
         w: 10,
         h: 5,
-        speed: 30
+        speed: 80
     };
 
     const computerBullet = {
         w: 0,
         h: 0,
-        speed: 30,
+        speed: 80,
         invisibleBulletSpeed: 4000
     };
 
@@ -393,7 +393,7 @@ const playerShooting = () => {
         playerBullet.w,
         playerBullet.h,
         playerBullet.speed));
-    setTimeout(function () { playersBulletArr.shift() }, 700);
+    setTimeout(function () { playersBulletArr.shift() }, 400);
 
     };
 
@@ -470,7 +470,7 @@ const computerShooting = () => {
         computerBullet.w,
         computerBullet.h,
         computerBullet.speed));
-    setTimeout(function () { computersBulletArr.shift() }, 700);
+    setTimeout(function () { computersBulletArr.shift() }, 400);
 
 };
 
