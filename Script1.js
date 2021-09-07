@@ -41,6 +41,10 @@ const theGame = () => {
         invisibleBulletSpeed: 4000
     };
 
+    const computerAim = {
+
+    }
+
     let playersBulletArr = [];
     let computersBulletArr = [];
 
@@ -53,31 +57,44 @@ const textContent = () => {
     computerHealth.textContent = `ENEMY: ${computer.health}`;
 }
 
+    const drawRotateImage = (pic, x, y, w, h, degrees) => {
+     
+        ctx.save();
+        ctx.translate(x - w / 2, y - h / 2);
+        ctx.rotate(degrees * Math.PI / 180.0);
+        ctx.translate(- x - w / 2, - y - h / 2);
+        ctx.drawImage(pic, x, y, w, h);
+        ctx.restore();
+    }
+
 //CREATING PLAYER'S AND COMPUTER'S PLANES WITH ABILITY TO ROTATE
 
 const drawingPlanes = () => {
+
     let plane1 = new Image();
     plane1.src = "img/plane1.png";
     plane1.onload = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.translate(player.x - player.w / 2, player.y - player.h / 2);
-        ctx.rotate(player.degrees * Math.PI / 180.0);
-        ctx.translate(-player.x - player.w / 2, -player.y - player.h / 2);
-        ctx.drawImage(plane1, player.x, player.y, player.w, player.h);
-        ctx.restore();
+        drawRotateImage(plane1,
+            player.x,
+            player.y,
+            player.w,
+            player.h,
+            player.degrees);
     };
 
     let plane2 = new Image();
     plane2.src = "img/plane2.png";
     plane2.onload = () => {
-        ctx.save();
-        ctx.translate(computer.x - computer.w / 2, computer.y - computer.h / 2);
-        ctx.rotate(computer.degrees * Math.PI / 180.0);
-        ctx.translate(-computer.x - computer.w / 2, -computer.y - computer.h / 2);
-        ctx.drawImage(plane2, computer.x, computer.y, computer.w, computer.h);
-        ctx.restore();
+        drawRotateImage(plane2,
+            computer.x,
+            computer.y,
+            computer.w,
+            computer.h,
+            computer.degrees);
     };
+
+    
 };
 
 // CREATING BULLETS
@@ -123,12 +140,12 @@ class Shot {
             bulletPic.src = "img/bullet2.png";
         }
         bulletPic.onload = () => {
-            ctx.save();
-            ctx.translate(this.x - this.w / 2, this.y - this.h / 2);
-            ctx.rotate(this.degrees * Math.PI / 180.0);
-            ctx.translate(- this.x - this.w / 2, - this.y - this.h / 2);
-            ctx.drawImage(bulletPic, this.x + this.w, this.y + this.h / 2, this.bulletW, this.bulletH);
-            ctx.restore();
+            drawRotateImage(bulletPic,
+                this.x - this.w / 2,
+                this.y - this.h /2,
+                this.bulletW,
+                this.bulletH,
+                this.degrees);
         }
     }
     };
