@@ -66,12 +66,12 @@
 }
 
 #computerHealth {
-    right: 1%;
+    right: 2%;
     background-color: red;
 }
 
 #playerHealth {
-    left: 1%;
+    left: 2%;
     background-color: blue;
 }
 
