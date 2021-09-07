@@ -9,7 +9,7 @@ const theGame = () => {
         y: 100,
         w: 94,
         h: 30,
-        speed: 5,
+        speed: 4,
         degrees: 0,
         dx: 2,
         dy: 0,
@@ -21,7 +21,7 @@ const theGame = () => {
         y: 100,
         w: 94,
         h: 30,
-        speed: 5,
+        speed: 4,
         degrees: 0,
         dx: 0,
         dy: 0,
@@ -31,13 +31,13 @@ const theGame = () => {
     const playerBullet = {
         w: 10,
         h: 5,
-        speed: 40
+        speed: 30
     };
 
     const computerBullet = {
         w: 0,
         h: 0,
-        speed: 40,
+        speed: 30,
         invisibleBulletSpeed: 4000
     };
 
@@ -393,7 +393,7 @@ const playerShooting = () => {
         playerBullet.w,
         playerBullet.h,
         playerBullet.speed));
-    setTimeout(function () { playersBulletArr.shift() }, 1000);
+    setTimeout(function () { playersBulletArr.shift() }, 700);
 
     };
 
@@ -470,7 +470,7 @@ const computerShooting = () => {
         computerBullet.w,
         computerBullet.h,
         computerBullet.speed));
-    setTimeout(function () { computersBulletArr.shift() }, 1000);
+    setTimeout(function () { computersBulletArr.shift() }, 700);
 
 };
 
@@ -554,7 +554,7 @@ const autopilot = () => {
         chase();
     }
 
-    //computerShooting();
+    computerShooting();
 };
 
 //ANIMATION
