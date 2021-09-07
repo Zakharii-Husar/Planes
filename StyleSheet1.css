@@ -76,11 +76,10 @@
 }
 
 #fire {
-    background-image: url("img/fire.png");
     position: absolute;
     bottom: 10%;
     right: 0;
-background-size: 100%;
+    width: 10%;
 }
 
 #bottomPanel{
