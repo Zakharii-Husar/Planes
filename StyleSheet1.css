@@ -75,11 +75,13 @@
     background-color: blue;
 }
 
-#fire{
+#fire {
+    background-image: url("img/fire.png");
     position: absolute;
-    bottom: 0;
+    bottom: 10%;
     right: 0;
     width: 10%;
+    height: 10%;
 }
 
 #bottomPanel{
