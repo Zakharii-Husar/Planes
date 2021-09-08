@@ -417,7 +417,7 @@ const crashConditions = (object) => {
                 playerBullet.h,
                 playerBullet.speed))
             setTimeout(function () { playersBulletArr.shift() }, 900);
-            shootingTimer 0;
+            shootingTimer = 0;
         };
         shootingTimer += 1;
     };
