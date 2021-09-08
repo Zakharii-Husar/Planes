@@ -57,12 +57,20 @@ const textContent = () => {
     computerHealth.textContent = `ENEMY: ${computer.health}`;
 }
 
+    const detectPlayer = () => {
+        //ctx.fillRect(computer.x, computer.y, -canvas.width, computer.h);
+
+    }
+
     const drawRotateImage = (pic, x, y, w, h, degrees) => {
      
         ctx.save();
         ctx.translate(x - w / 2, y - h / 2);
         ctx.rotate(degrees * Math.PI / 180.0);
         ctx.translate(- x - w / 2, - y - h / 2);
+        if (x == computer.x) {
+            detectPlayer();
+        }
         ctx.drawImage(pic, x, y, w, h);
         ctx.restore();
     }
@@ -148,7 +156,7 @@ class Shot {
                 this.degrees);
         }
     }
-    };
+ };
 
     const drawBullets = () => {
         for (let i = 0; i < playersBulletArr.length; i++) {
@@ -308,14 +316,14 @@ const orientation = (object) => {
 
  // SETTING LIMITATIONS FOR MOVING INSIDE OF THE CANVAS
 
-        if (object.x < - 94) {
-            object.x = canvas.width + 94;
+    if (object.x < - object.w) {
+        object.x = canvas.width + object.w;
         };
-        if (object.x > canvas.width + object.w) {
-            object.x = -94;
-        };
-        if (object.y < 30) {
-            object.y = 30
+    if (object.x > canvas.width + object.w) {
+        object.x = -object.w;
+    };
+    if (object.y < object.h) {
+        object.y = object.h
         }
 
 
@@ -571,7 +579,7 @@ const autopilot = () => {
         chase();
     }
 
-    computerShooting();
+  //  computerShooting();
 };
 
 //ANIMATION
