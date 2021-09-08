@@ -41,10 +41,6 @@ const theGame = () => {
         invisibleBulletSpeed: 4000
     };
 
-    const computerAim = {
-
-    }
-
     let playersBulletArr = [];
     let computersBulletArr = [];
 
@@ -579,12 +575,13 @@ const autopilot = () => {
         chase();
     }
 
-  //  computerShooting();
+    computerShooting();
 };
 
 //ANIMATION
 
     const animating = () => {
+        console.log(playersBulletArr.length)
     sensorButtons();
     textContent();
     autopilot();
