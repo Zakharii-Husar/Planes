@@ -400,22 +400,26 @@ const crashConditions = (object) => {
 }
 
 // MANUAL CONTROL
-
-const playerShooting = () => {
-    playersBulletArr.push(new Shot(
-        player.w,
-        player.h,
-        player.x,
-        player.y,
-        player.dx,
-        player.dy,
-        player.degrees,
-        computer,
-        playerBullet.w,
-        playerBullet.h,
-        playerBullet.speed));
-    setTimeout(function () { playersBulletArr.shift() }, 900);
-
+    let shootingTimer = 0;
+    let shootingFrequency = 5;
+    const playerShooting = () => {
+        if (shootingTimer === shootingFrequency) {
+            playersBulletArr.push(new Shot(
+                player.w,
+                player.h,
+                player.x,
+                player.y,
+                player.dx,
+                player.dy,
+                player.degrees,
+                computer,
+                playerBullet.w,
+                playerBullet.h,
+                playerBullet.speed))
+            setTimeout(function () { playersBulletArr.shift() }, 900);
+            shootingTimer = 0;
+        };
+        shootingTimer +=1;
     };
 
 
@@ -478,21 +482,22 @@ document.addEventListener("keydown", keyDown);
     };
 // BOT'S CONTROL
 
-const computerShooting = () => {
-    computersBulletArr.push(new Shot(
-        computer.w,
-        computer.h,
-        computer.x - 40,
-        computer.y,
-        computer.dx,
-        computer.dy,
-        computer.degrees,
-        player,
-        computerBullet.w,
-        computerBullet.h,
-        computerBullet.speed));
-    setTimeout(function () { computersBulletArr.shift() }, 900);
-
+    const computerShooting = () => {
+        if (shootingTimer === shootingFrequency) {
+            computersBulletArr.push(new Shot(
+                computer.w,
+                computer.h,
+                computer.x - 40,
+                computer.y,
+                computer.dx,
+                computer.dy,
+                computer.degrees,
+                player,
+                computerBullet.w,
+                computerBullet.h,
+                computerBullet.speed));
+            setTimeout(function () { computersBulletArr.shift() }, 900);
+        }
 };
 
 const autopilot = () => {
