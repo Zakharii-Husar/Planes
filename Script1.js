@@ -123,6 +123,7 @@ class Shot {
             this.y >= this.target.y &&
             this.y <= this.target.y + this.target.h) {
             this.target.health -= 1;
+            if (this.target == player) this.target.health -= 10;
             computerBullet.w = 10;
             computerBullet.h = 5;
             computerBullet.speed = 40;
