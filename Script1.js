@@ -417,9 +417,7 @@ const crashConditions = (object) => {
                 playerBullet.h,
                 playerBullet.speed))
             setTimeout(function () { playersBulletArr.shift() }, 900);
-            shootingTimer = 0;
         };
-        shootingTimer += 1;
     };
 
 
@@ -483,6 +481,7 @@ document.addEventListener("keydown", keyDown);
 // BOT'S CONTROL
 
     const computerShooting = () => {
+        if (shootingTimer === shootingFrequency || shootingTimer === 2) {
             computersBulletArr.push(new Shot(
                 computer.w,
                 computer.h,
@@ -496,6 +495,9 @@ document.addEventListener("keydown", keyDown);
                 computerBullet.h,
                 computerBullet.speed));
             setTimeout(function () { computersBulletArr.shift() }, 900);
+            shootingTimer = 0;
+        }
+        shootingTimer += 1;
 };
 
 const autopilot = () => {
