@@ -401,7 +401,7 @@ const crashConditions = (object) => {
 
 // MANUAL CONTROL
     let shootingTimer = 0;
-    let shootingFrequency = 15;
+    let shootingFrequency = 10;
     const playerShooting = () => {
         if (shootingTimer === shootingFrequency) {
             playersBulletArr.push(new Shot(
@@ -481,7 +481,7 @@ document.addEventListener("keydown", keyDown);
 // BOT'S CONTROL
 
     const computerShooting = () => {
-        if (shootingTimer === shootingFrequency || shootingTimer === 2) {
+        if (shootingTimer === shootingFrequency) {
             computersBulletArr.push(new Shot(
                 computer.w,
                 computer.h,
