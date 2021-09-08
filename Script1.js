@@ -401,7 +401,7 @@ const crashConditions = (object) => {
 
 // MANUAL CONTROL
     let shootingTimer = 0;
-    let shootingFrequency = 5;
+    let shootingFrequency = 10;
     const playerShooting = () => {
         if (shootingTimer === shootingFrequency) {
             playersBulletArr.push(new Shot(
