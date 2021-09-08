@@ -477,7 +477,7 @@ document.addEventListener("keydown", keyDown);
         rightBtn.addEventListener("touchstart", () => right = true);
         rightBtn.addEventListener("touchend", () => right = false);
         if (trigger == true) playerShooting();
-        if (left == true) moveLeft();
+        if (left == true && shootingTimer === shootingFrequency) moveLeft();
         if (right == true) moveRight();
     };
 // BOT'S CONTROL
