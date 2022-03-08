@@ -589,13 +589,12 @@ const autopilot = () => {
 //ANIMATION
 
     const animating = () => {
-        console.log(playersBulletArr.length)
     sensorButtons();
     textContent();
     autopilot();
     drawingPlanes();
-    orientation(player);
-    orientation(computer);
+    orientation2(player);
+    orientation2(computer);
     crashConditions(player);
     crashConditions(computer);
     drawBullets();
