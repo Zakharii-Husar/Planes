@@ -1,6 +1,6 @@
 // JavaScript source code
 
-//import orientation from 'orientation.js'
+import { orientation } from 'orientation.js'
 
 const theGame = () => {
     const canvas = document.getElementById("canvas");
@@ -15,7 +15,7 @@ const theGame = () => {
         degrees: 0,
         dx: 2,
         dy: 0,
-        health: 100
+          health: 100
     };
 
     const computer = {
@@ -593,8 +593,8 @@ const autopilot = () => {
     textContent();
     autopilot();
     drawingPlanes();
-    orientation2(player);
-    orientation2(computer);
+    orientation(player);
+    orientation(computer);
     crashConditions(player);
     crashConditions(computer);
     drawBullets();
