@@ -1,6 +1,6 @@
 // JavaScript source code
 
-import { orientation } from '. /orientation.js'
+import { orientation } from './orientation.js'
 
 const theGame = () => {
     const canvas = document.getElementById("canvas");
