@@ -1,4 +1,4 @@
-export const orientation = (object) => {
+export default function(object){
 
         if (object.speed > 5) {
             object.speed = 5;
