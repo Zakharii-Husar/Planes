@@ -1,7 +1,5 @@
 // JavaScript source code
 
-import orientation  from './orientation.js'
-
 const theGame = () => {
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
@@ -172,7 +170,7 @@ class Shot {
 
 // CHANGING DIRECTION DEPENDING ON THE ANGLE OF AN OBJECT
 
-const orientation2 = (object) => {
+const orientation = (object) => {
 
         if (object.speed > 5) {
             object.speed = 5;
