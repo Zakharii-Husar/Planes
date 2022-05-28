@@ -14,7 +14,13 @@ const theGame = () => {
         degrees: 0,
         dx: 2,
         dy: 0,
-        health: 100
+        health: 100,
+        bullet: {
+            w: 10,
+            h: 5,
+            speed: 40
+        },
+        bulletArr: []
     };
 
     const computer = {
@@ -26,24 +32,15 @@ const theGame = () => {
         degrees: 0,
         dx: 0,
         dy: 0,
-        health: 100
+        health: 100,
+        bullet: {
+            w: 0,
+            h: 0,
+            speed: 40,
+            invisibleBulletSpeed: 4000
+        },
+        bulletArr: []
     };
-
-    const playerBullet = {
-        w: 10,
-        h: 5,
-        speed: 40
-    };
-
-    const computerBullet = {
-        w: 0,
-        h: 0,
-        speed: 40,
-        invisibleBulletSpeed: 4000
-    };
-
-    let playersBulletArr = [];
-    let computersBulletArr = [];
 
 
     const textContent = () => {
@@ -54,20 +51,11 @@ const theGame = () => {
         computerHealth.textContent = `ENEMY: ${computer.health}`;
     }
 
-    const detectPlayer = () => {
-        //ctx.fillRect(computer.x, computer.y, -canvas.width, computer.h);
-
-    }
-
     const drawRotateImage = (pic, x, y, w, h, degrees) => {
-
         ctx.save();
         ctx.translate(x - w / 2, y - h / 2);
         ctx.rotate(degrees * Math.PI / 180.0);
         ctx.translate(- x - w / 2, - y - h / 2);
-        if (x == computer.x) {
-            detectPlayer();
-        }
         ctx.drawImage(pic, x, y, w, h);
         ctx.restore();
     }
@@ -76,7 +64,7 @@ const theGame = () => {
 
     const drawingPlanes = () => {
 
-        let plane1 = new Image();
+        const plane1 = new Image();
         plane1.src = "img/plane1.png";
         plane1.onload = () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,7 +76,7 @@ const theGame = () => {
                 player.degrees);
         };
 
-        let plane2 = new Image();
+        const plane2 = new Image();
         plane2.src = "img/plane2.png";
         plane2.onload = () => {
             drawRotateImage(plane2,
@@ -124,15 +112,14 @@ const theGame = () => {
                 this.y >= this.target.y &&
                 this.y <= this.target.y + this.target.h) {
                 this.target.health -= 1;
-                if (this.target == player) this.target.health -= 10;
-                computerBullet.w = 10;
-                computerBullet.h = 5;
-                computerBullet.speed = 40;
+                computer.bullet.w = 10;
+                computer.bullet.h = 5;
+                computer.bullet.speed = 40;
             }
             else {
-                computerBullet.w = 0;
-                computerBullet.h = 0;
-                computerBullet.speed = computerBullet.invisibleBulletSpeed;
+                computer.bullet.w = 0;
+                computer.bullet.h = 0;
+                computer.bullet.speed = computer.bullet.invisibleBulletSpeed;
             }
             this.x += this.dx * this.bulletSpeed;
             this.y += this.dy * this.bulletSpeed;
@@ -157,14 +144,14 @@ const theGame = () => {
     };
 
     const drawBullets = () => {
-        for (let i = 0; i < playersBulletArr.length; i++) {
-            playersBulletArr[i].update();
-            playersBulletArr[i].draw();
+        for (let i = 0; i < player.bulletArr.length; i++) {
+            player.bulletArr[i].update();
+            player.bulletArr[i].draw();
         };
 
-        for (let j = 0; j < computersBulletArr.length; j++) {
-            computersBulletArr[j].update();
-            computersBulletArr[j].draw();
+        for (let j = 0; j < computer.bulletArr.length; j++) {
+            computer.bulletArr[j].update();
+            computer.bulletArr[j].draw();
         };
     };
 
@@ -235,8 +222,8 @@ const theGame = () => {
         counter += 1;
         object.dx = 0;
         object.dy = 0;
-        computerBullet.w = 0;
-        computerBullet.h = 0;
+        computer.bullet.w = 0;
+        computer.bullet.h = 0;
 
         ctx.drawImage(
             sprite,
@@ -286,7 +273,7 @@ const theGame = () => {
     let shootingFrequency = 10;
     const playerShooting = () => {
         if (shootingTimer === shootingFrequency) {
-            playersBulletArr.push(new Shot(
+            player.bulletArr.push(new Shot(
                 player.w,
                 player.h,
                 player.x,
@@ -295,10 +282,10 @@ const theGame = () => {
                 player.dy,
                 player.degrees,
                 computer,
-                playerBullet.w,
-                playerBullet.h,
-                playerBullet.speed))
-            setTimeout(function () { playersBulletArr.shift() }, 900);
+                player.bullet.w,
+                player.bullet.h,
+                player.bullet.speed))
+            setTimeout(function () { player.bulletArr.shift() }, 900);
         };
     };
 
@@ -364,7 +351,7 @@ const theGame = () => {
 
     const computerShooting = () => {
         if (shootingTimer === shootingFrequency) {
-            computersBulletArr.push(new Shot(
+            computer.bulletArr.push(new Shot(
                 computer.w,
                 computer.h,
                 computer.x - 40,
@@ -373,10 +360,10 @@ const theGame = () => {
                 computer.dy,
                 computer.degrees,
                 player,
-                computerBullet.w,
-                computerBullet.h,
-                computerBullet.speed));
-            setTimeout(function () { computersBulletArr.shift() }, 900);
+                computer.bullet.w,
+                computer.bullet.h,
+                computer.bullet.speed));
+            setTimeout(function () { computer.bulletArr.shift() }, 900);
             shootingTimer = 0;
         }
         shootingTimer += 1;
