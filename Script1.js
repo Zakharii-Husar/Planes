@@ -108,7 +108,6 @@ const theGame = () => {
 
     const shooting = (shooter) => {
         const interval = setInterval(()=>{
-        
             bulletArr.push(new Shot(
                 shooter.w,
                 shooter.h,
@@ -121,9 +120,9 @@ const theGame = () => {
                 bullet.h,
                 bullet.speed,
                 shooter == computer ? player : computer));
-                setTimeout(function () { bulletArr.shift(); }, 500);
                 clearInterval(interval);
-        },200)
+                setTimeout(function () { bulletArr.shift(); }, 500);
+        }, 800)
 
     };
 
@@ -306,6 +305,7 @@ const theGame = () => {
     };
 
     document.addEventListener("keydown", keyDown);
+    document.addEventListener("keypress", keyDown);
 
     //MOBILE CONTROL
     let trigger = false;
