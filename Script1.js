@@ -6,41 +6,36 @@ const theGame = () => {
     const ctx = canvas.getContext("2d");
 
     const player = {
-        x: 94,
+        x: 47,
         y: 100,
-        w: 94,
-        h: 30,
+        w: 47,
+        h: 15,
         speed: 4,
         degrees: 0,
         dx: 2,
         dy: 0,
-        health: 100,
-        bullet: {
-            w: 10,
-            h: 5,
-            speed: 40
-        },
-        bulletArr: []
+        health: 100
     };
 
     const computer = {
         x: canvas.width,
         y: 100,
-        w: 94,
-        h: 30,
+        w: 47,
+        h: 15,
         speed: 4,
         degrees: 0,
         dx: 0,
         dy: 0,
-        health: 100,
-        bullet: {
-            w: 0,
-            h: 0,
-            speed: 40,
-            invisibleBulletSpeed: 4000
-        },
-        bulletArr: []
+        health: 100
     };
+
+    const bullet = {
+        w: 7,
+        h: 3,
+        speed: 40
+    }
+
+    const bulletArr = [];
 
 
     const textContent = () => {
@@ -60,40 +55,9 @@ const theGame = () => {
         ctx.restore();
     }
 
-    //CREATING PLAYER'S AND COMPUTER'S PLANES WITH ABILITY TO ROTATE
-
-    const drawingPlanes = () => {
-
-        const plane1 = new Image();
-        plane1.src = "img/plane1.png";
-        plane1.onload = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawRotateImage(plane1,
-                player.x,
-                player.y,
-                player.w,
-                player.h,
-                player.degrees);
-        };
-
-        const plane2 = new Image();
-        plane2.src = "img/plane2.png";
-        plane2.onload = () => {
-            drawRotateImage(plane2,
-                computer.x,
-                computer.y,
-                computer.w,
-                computer.h,
-                computer.degrees);
-        };
-
-
-    };
-
-    // CREATING BULLETS
-
+    //CREATING PLAYER'S AND COMPUTER'S PLANES & BULLETS WITH ABILITY TO ROTATE
     class Shot {
-        constructor(w, h, x, y, dx, dy, degrees, target, bulletW, bulletH, bulletSpeed) {
+        constructor(w, h, x, y, dx, dy, degrees, bulletW, bulletH, bulletSpeed, target) {
             this.w = w;
             this.h = h;
             this.x = x;
@@ -112,20 +76,12 @@ const theGame = () => {
                 this.y >= this.target.y &&
                 this.y <= this.target.y + this.target.h) {
                 this.target.health -= 1;
-                computer.bullet.w = 10;
-                computer.bullet.h = 5;
-                computer.bullet.speed = 40;
-            }
-            else {
-                computer.bullet.w = 0;
-                computer.bullet.h = 0;
-                computer.bullet.speed = computer.bullet.invisibleBulletSpeed;
             }
             this.x += this.dx * this.bulletSpeed;
             this.y += this.dy * this.bulletSpeed;
         }
         draw() {
-            let bulletPic = new Image();
+            const bulletPic = new Image();
             if (this.target == computer) {
                 bulletPic.src = "img/bullet.png";
             }
@@ -144,15 +100,60 @@ const theGame = () => {
     };
 
     const drawBullets = () => {
-        for (let i = 0; i < player.bulletArr.length; i++) {
-            player.bulletArr[i].update();
-            player.bulletArr[i].draw();
+        for (let i = 0; i < bulletArr.length; i++) {
+            bulletArr[i].update();
+            bulletArr[i].draw();
+        };
+    };
+
+    const shooting = (shooter) => {
+        const interval = setInterval(()=>{
+        
+            bulletArr.push(new Shot(
+                shooter.w,
+                shooter.h,
+                shooter.x,
+                shooter.y,
+                shooter.dx,
+                shooter.dy,
+                shooter.degrees,
+                bullet.w,
+                bullet.h,
+                bullet.speed,
+                shooter == computer ? player : computer));
+                setTimeout(function () { bulletArr.shift(); }, 500);
+                clearInterval(interval);
+        },200)
+
+    };
+
+    const drawObjects = () => {
+
+        const playersPlanePic = new Image();
+        playersPlanePic.src = "img/plane1.png";
+        const computersPlanePic = new Image();
+        computersPlanePic.src = "img/plane2.png";
+
+        playersPlanePic.onload = () => {
+            computersPlanePic.onload = () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawRotateImage(playersPlanePic,
+                    player.x,
+                    player.y,
+                    player.w,
+                    player.h,
+                    player.degrees);
+                drawRotateImage(computersPlanePic,
+                    computer.x,
+                    computer.y,
+                    computer.w,
+                    computer.h,
+                    computer.degrees);
+                drawBullets();
+            }
         };
 
-        for (let j = 0; j < computer.bulletArr.length; j++) {
-            computer.bulletArr[j].update();
-            computer.bulletArr[j].draw();
-        };
+
     };
 
 
@@ -222,8 +223,6 @@ const theGame = () => {
         counter += 1;
         object.dx = 0;
         object.dy = 0;
-        computer.bullet.w = 0;
-        computer.bullet.h = 0;
 
         ctx.drawImage(
             sprite,
@@ -268,27 +267,6 @@ const theGame = () => {
         }
     }
 
-    // MANUAL CONTROL
-    let shootingTimer = 0;
-    let shootingFrequency = 10;
-    const playerShooting = () => {
-        if (shootingTimer === shootingFrequency) {
-            player.bulletArr.push(new Shot(
-                player.w,
-                player.h,
-                player.x,
-                player.y,
-                player.dx,
-                player.dy,
-                player.degrees,
-                computer,
-                player.bullet.w,
-                player.bullet.h,
-                player.bullet.speed))
-            setTimeout(function () { player.bulletArr.shift() }, 900);
-        };
-    };
-
 
     //KEYS
 
@@ -323,7 +301,7 @@ const theGame = () => {
             speedUp();
         };
         if (e.key === " ") {
-            playerShooting();
+            shooting(player);
         }
     };
 
@@ -343,30 +321,9 @@ const theGame = () => {
         leftBtn.addEventListener("touchend", () => left = false);
         rightBtn.addEventListener("touchstart", () => right = true);
         rightBtn.addEventListener("touchend", () => right = false);
-        if (trigger == true) playerShooting();
+        if (trigger == true) shooting(player);
         if (left == true) moveLeft();
         if (right == true) moveRight();
-    };
-    // BOT'S CONTROL
-
-    const computerShooting = () => {
-        if (shootingTimer === shootingFrequency) {
-            computer.bulletArr.push(new Shot(
-                computer.w,
-                computer.h,
-                computer.x - 40,
-                computer.y,
-                computer.dx,
-                computer.dy,
-                computer.degrees,
-                player,
-                computer.bullet.w,
-                computer.bullet.h,
-                computer.bullet.speed));
-            setTimeout(function () { computer.bulletArr.shift() }, 900);
-            shootingTimer = 0;
-        }
-        shootingTimer += 1;
     };
 
     const autopilot = () => {
@@ -449,7 +406,7 @@ const theGame = () => {
             chase();
         }
 
-        computerShooting();
+        shooting(computer);
     };
 
     //ANIMATION
@@ -458,13 +415,13 @@ const theGame = () => {
         sensorButtons();
         textContent();
         autopilot();
-        drawingPlanes();
+        drawObjects();
         orientation(player);
         orientation(computer);
         crashConditions(player);
         crashConditions(computer);
-        drawBullets();
         requestAnimationFrame(animating);
+        console.log(bulletArr.length);
     };
 
     animating();
