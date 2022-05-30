@@ -1,4 +1,4 @@
-const drawObjects = (ctx, canvas, player, computer, bulletArr) => {
+const drawObjects = ( { ctx, canvas, player, computer, bullet}) => {
 
     const drawRotateImage = (pic, x, y, w, h, degrees) => {
         ctx.save();
@@ -15,9 +15,9 @@ const drawObjects = (ctx, canvas, player, computer, bulletArr) => {
     computersPlanePic.src = "img/plane2.png";
 
     const drawBullets = () => {
-        for (let i = 0; i < bulletArr.length; i++) {
-            bulletArr[i].update();
-            bulletArr[i].draw(drawRotateImage);
+        for (let i = 0; i < bullet.amount.length; i++) {
+            bullet.amount[i].update();
+            bullet.amount[i].draw(drawRotateImage);
         };
     };
 
