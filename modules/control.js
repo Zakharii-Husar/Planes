@@ -42,11 +42,12 @@ const keyControl = (PROPERTIES) => {
     document.addEventListener("keydown", keyDown);
 }
 
+let trigger = false;
+let left = false;
+let right = false;
+
 const sensorControl = (PROPERTIES) => {
     //MOBILE CONTROL
-    let trigger = false;
-    let left = false;
-    let right = false;
     const sensorButtons = () => {
         const fireBtn = document.getElementById("fire");
         const leftBtn = document.getElementById("left");
@@ -58,8 +59,8 @@ const sensorControl = (PROPERTIES) => {
         rightBtn.addEventListener("touchstart", () => right = true);
         rightBtn.addEventListener("touchend", () => right = false);
         if (trigger == true) shooting(PROPERTIES.player, PROPERTIES.computer, PROPERTIES.bullet);
-        if (left == true) moveLeft(PROPERTIES.player);
-        if (right == true) moveRight(PROPERTIES.player);
+        if (left == true) moveLeft(PROPERTIES);
+        if (right == true) moveRight(PROPERTIES);
     };
     sensorButtons();
 }
