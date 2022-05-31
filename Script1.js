@@ -12,8 +12,8 @@ const theGame = () => {
             name: "player",
             x: 47,
             y: 100,
-            w: 47,
-            h: 15,
+            w: 70,
+            h: 22,
             speed: 4,
             degrees: 0,
             dx: 2,
@@ -24,8 +24,8 @@ const theGame = () => {
             name: "computer",
             x: document.getElementById("canvas").width,
             y: 100,
-            w: 47,
-            h: 15,
+            w: 70,
+            h: 22,
             speed: 4,
             degrees: 0,
             dx: 0,
@@ -55,7 +55,6 @@ const theGame = () => {
     //ANIMATION
 
     const animating = () => {
-        sensorControl(PROPERTIES);
         textContent();
         autopilot(PROPERTIES);
         drawObjects(PROPERTIES);
@@ -64,6 +63,7 @@ const theGame = () => {
         crash(PROPERTIES.player, PROPERTIES.ctx);
         crash(PROPERTIES.computer, PROPERTIES.ctx);
         requestAnimationFrame(animating);
+        sensorControl(PROPERTIES);
     };
     keyControl(PROPERTIES);
     animating();

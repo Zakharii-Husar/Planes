@@ -18,7 +18,7 @@
                 this.x <= this.target.x + this.target.w &&
                 this.y >= this.target.y &&
                 this.y <= this.target.y + this.target.h) {
-                this.target.health -= 1;
+                this.target.health -= Math.floor(Math.random() * 20);
             }
             this.x += this.dx * this.bulletSpeed;
             this.y += this.dy * this.bulletSpeed;
