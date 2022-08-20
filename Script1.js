@@ -72,8 +72,22 @@ const theGame = () => {
 //MENU
 
 const fullScreen = () => {
-    container.requestFullscreen(); screen.orientation.lock('landscape')
+    if (container.requestFullscreen) {
+        container.requestFullscreen();
+    } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+    } else if (container.mozRequestFullScreen) {
+        container.mozRequestFullScreen();
+    }else if (container.msRequestFullscreen){
+        container.msRequestFullscreen();
+    };
+    // || container.webkitRequestFullscreen 
+    // || container.mozRequestFullScreen 
+    // ||  container.msRequestFullscreen;
+    screen.orientation.lock('landscape');
 };
+
+
 
 
 const start = () => {
