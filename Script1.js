@@ -72,18 +72,21 @@ const theGame = () => {
 //MENU
 
 const fullScreen = () => {
-    if (container.requestFullscreen) {
-        container.requestFullscreen();
-    } else if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen();
-    } else if (container.mozRequestFullScreen) {
-        container.mozRequestFullScreen();
-    }else if (container.msRequestFullscreen){
-        container.msRequestFullscreen();
-    };
-    // || container.webkitRequestFullscreen 
-    // || container.mozRequestFullScreen 
-    // ||  container.msRequestFullscreen;
+    // if (container.requestFullscreen) {
+    //     container.requestFullscreen();
+    // } else if (container.webkitRequestFullscreen) {
+    //     container.webkitRequestFullscreen();
+    // } else if (container.mozRequestFullScreen) {
+    //     container.mozRequestFullScreen();
+    // }else if (container.msRequestFullscreen){
+    //     container.msRequestFullscreen();
+    // }
+    
+    let scr = container.requestFullscreen
+    || container.webkitRequestFullscreen 
+    || container.mozRequestFullScreen 
+    ||  container.msRequestFullscreen;
+    scr.call(container);
     screen.orientation.lock('landscape');
 };
 
