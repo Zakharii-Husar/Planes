@@ -100,7 +100,8 @@ const fullScreen = () => {
     // ||  container.msRequestFullscreen;
     // scr.call(container);
     // container.webkitRequestFullscreen();
-    screen.orientation.lock('landscape');
+    //screen.orientation.lock('landscape');
+    window.screen.orientation.lock("landscape");
 };
 
 
