@@ -82,12 +82,12 @@ const fullScreen = () => {
     //     container.msRequestFullscreen();
     // }
     
-    // let scr = container.requestFullscreen
-    // || container.webkitRequestFullscreen 
-    // || container.mozRequestFullScreen 
-    // ||  container.msRequestFullscreen;
-    // scr.call(container);
-    container.webkitRequestFullscreen();
+    let scr = container.requestFullscreen
+    || container.webkitRequestFullscreen 
+    || container.mozRequestFullScreen 
+    ||  container.msRequestFullscreen;
+    scr.call(container);
+   // container.webkitRequestFullscreen();
     screen.orientation.lock('landscape');
 };
 
