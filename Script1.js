@@ -77,8 +77,9 @@ const theGame = () => {
 //MENU
 
 const fullScreen = () => {
+    const container = document.getElementById("container");
+    container.requestFullscreen();
     screen.orientation.lock('landscape');
-    window.screen.orientation.lock("landscape");
 };
 
 
@@ -87,7 +88,6 @@ const fullScreen = () => {
 const start = () => {
     theGame();
     fullScreen();
-    console.log(screen.orientation)
 };
 
 START_BTN.addEventListener("click", start);
