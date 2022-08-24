@@ -79,10 +79,8 @@ const theGame = () => {
 //MENU
 
 const fullScreen = () => {
-    if (container.requestFullscreen) {
-        container.requestFullscreen();
-        fScreen = "requestFullscreen"
-    } else if (container.webkitRequestFullscreen) {
+
+    if (container.webkitRequestFullscreen) {
         container.webkitRequestFullscreen();
         fScreen = "webkitRequestFullscreen"
     } else if (container.mozRequestFullScreen) {
@@ -91,6 +89,9 @@ const fullScreen = () => {
     } else if (container.msRequestFullscreen) {
         container.msRequestFullscreen();
         fScreen = "msRequestFullscreen"
+    } else   if (container.requestFullscreen) {
+        container.requestFullscreen();
+        fScreen = "requestFullscreen"
     }
 
     // let scr = container.requestFullscreen
