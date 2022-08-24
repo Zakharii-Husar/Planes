@@ -8,7 +8,6 @@ import { keyControl, sensorControl } from './modules/control.js';
 
 const MENU_IMAGE = document.getElementById("menuImage");
 const START_BTN = document.getElementById("start");
-let fScreen = "initial";
 const theGame = () => {
     START_BTN.style.display = "none";
     MENU_IMAGE.style.display = "none";
@@ -55,8 +54,7 @@ const theGame = () => {
         playerHealth.textContent = `PLAYER: ${PROPERTIES.player.health}`;
 
         const computerHealth = document.getElementById("computerHealth");
-        //computerHealth.textContent = `ENEMY: ${PROPERTIES.computer.health}`;
-        computerHealth.textContent = fScreen;
+        computerHealth.textContent = `ENEMY: ${PROPERTIES.computer.health}`;
     }
 
     //ANIMATION
@@ -79,14 +77,7 @@ const theGame = () => {
 //MENU
 
 const fullScreen = () => {
-
-    // let scr = container.requestFullscreen
-    // || container.webkitRequestFullscreen 
-    // || container.mozRequestFullScreen 
-    // ||  container.msRequestFullscreen;
-    // scr.call(container);
-    // container.webkitRequestFullscreen();
-    screen.orientation.lock('landscape').then(()=>{console.log("locked")}).catch(err=> fScreen = err);
+    screen.orientation.lock('landscape');
     window.screen.orientation.lock("landscape");
 };
 
