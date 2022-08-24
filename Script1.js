@@ -5,7 +5,12 @@ import crash from './modules/crash.js';
 import autopilot from './modules/autopilot.js';
 import { keyControl, sensorControl } from './modules/control.js';
 
+
+const MENU_IMAGE = document.getElementById("menuImage");
+const START_BTN = document.getElementById("start");
 const theGame = () => {
+    START_BTN.style.display = "none";
+    MENU_IMAGE.style.display = "none";
 
     const PROPERTIES = {
         player: {
@@ -78,16 +83,16 @@ const fullScreen = () => {
         container.webkitRequestFullscreen();
     } else if (container.mozRequestFullScreen) {
         container.mozRequestFullScreen();
-    }else if (container.msRequestFullscreen){
+    } else if (container.msRequestFullscreen) {
         container.msRequestFullscreen();
     }
-    
+
     // let scr = container.requestFullscreen
     // || container.webkitRequestFullscreen 
     // || container.mozRequestFullScreen 
     // ||  container.msRequestFullscreen;
     // scr.call(container);
-   // container.webkitRequestFullscreen();
+    // container.webkitRequestFullscreen();
     screen.orientation.lock('landscape');
 };
 
@@ -99,5 +104,4 @@ const start = () => {
     fullScreen();
 };
 
-const startBtn = document.getElementById("start");
-startBtn.addEventListener("click", start);
+START_BTN.addEventListener("click", start);
