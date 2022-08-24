@@ -96,7 +96,7 @@ const fullScreen = () => {
 
 const start = () => {
     theGame();
-   // fullScreen();
+    fullScreen();
 };
 
 const startBtn = document.getElementById("start");
