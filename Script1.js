@@ -80,19 +80,19 @@ const theGame = () => {
 
 const fullScreen = () => {
 
-    if (container.webkitRequestFullscreen) {
-        container.webkitRequestFullscreen();
-        fScreen = "webkitRequestFullscreen"
-    } else if (container.mozRequestFullScreen) {
-        container.mozRequestFullScreen();
-        fScreen = "mozRequestFullScreen"
-    } else if (container.msRequestFullscreen) {
-        container.msRequestFullscreen();
-        fScreen = "msRequestFullscreen"
-    } else   if (container.requestFullscreen) {
-        container.requestFullscreen();
-        fScreen = "requestFullscreen"
-    }
+    // if (container.webkitRequestFullscreen) {
+    //     container.webkitRequestFullscreen();
+    //     fScreen = "webkitRequestFullscreen"
+    // } else if (container.mozRequestFullScreen) {
+    //     container.mozRequestFullScreen();
+    //     fScreen = "mozRequestFullScreen"
+    // } else if (container.msRequestFullscreen) {
+    //     container.msRequestFullscreen();
+    //     fScreen = "msRequestFullscreen"
+    // } else   if (container.requestFullscreen) {
+    //     container.requestFullscreen();
+    //     fScreen = "requestFullscreen"
+    // }
 
     // let scr = container.requestFullscreen
     // || container.webkitRequestFullscreen 
