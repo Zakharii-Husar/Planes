@@ -8,6 +8,7 @@ import { keyControl, sensorControl } from './modules/control.js';
 
 const MENU_IMAGE = document.getElementById("menuImage");
 const START_BTN = document.getElementById("start");
+let fScreen = "initial";
 const theGame = () => {
     START_BTN.style.display = "none";
     MENU_IMAGE.style.display = "none";
@@ -54,7 +55,8 @@ const theGame = () => {
         playerHealth.textContent = `PLAYER: ${PROPERTIES.player.health}`;
 
         const computerHealth = document.getElementById("computerHealth");
-        computerHealth.textContent = `ENEMY: ${PROPERTIES.computer.health}`;
+        //computerHealth.textContent = `ENEMY: ${PROPERTIES.computer.health}`;
+        computerHealth.textContent = fScreen;
     }
 
     //ANIMATION
@@ -79,12 +81,16 @@ const theGame = () => {
 const fullScreen = () => {
     if (container.requestFullscreen) {
         container.requestFullscreen();
+        fScreen = "requestFullscreen"
     } else if (container.webkitRequestFullscreen) {
         container.webkitRequestFullscreen();
+        fScreen = "webkitRequestFullscreen"
     } else if (container.mozRequestFullScreen) {
         container.mozRequestFullScreen();
+        fScreen = "mozRequestFullScreen"
     } else if (container.msRequestFullscreen) {
         container.msRequestFullscreen();
+        fScreen = "msRequestFullscreen"
     }
 
     // let scr = container.requestFullscreen
