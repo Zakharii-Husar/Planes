@@ -80,28 +80,14 @@ const theGame = () => {
 
 const fullScreen = () => {
 
-    // if (container.webkitRequestFullscreen) {
-    //     container.webkitRequestFullscreen();
-    //     fScreen = "webkitRequestFullscreen"
-    // } else if (container.mozRequestFullScreen) {
-    //     container.mozRequestFullScreen();
-    //     fScreen = "mozRequestFullScreen"
-    // } else if (container.msRequestFullscreen) {
-    //     container.msRequestFullscreen();
-    //     fScreen = "msRequestFullscreen"
-    // } else   if (container.requestFullscreen) {
-    //     container.requestFullscreen();
-    //     fScreen = "requestFullscreen"
-    // }
-
     // let scr = container.requestFullscreen
     // || container.webkitRequestFullscreen 
     // || container.mozRequestFullScreen 
     // ||  container.msRequestFullscreen;
     // scr.call(container);
     // container.webkitRequestFullscreen();
-    //screen.orientation.lock('landscape');
-    //window.screen.orientation.lock("landscape");
+    screen.orientation.lock('landscape').then(()=>{console.log("locked")}).catch(err=> fScreen = err);
+    window.screen.orientation.lock("landscape");
 };
 
 
@@ -110,6 +96,7 @@ const fullScreen = () => {
 const start = () => {
     theGame();
     fullScreen();
+    console.log(screen.orientation)
 };
 
 START_BTN.addEventListener("click", start);

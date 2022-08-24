@@ -31,7 +31,6 @@
 
 
 #container {
-    -webkit-transform: rotate(90deg);
     display: flex;
     flex-direction: column;
     width: 100%;
