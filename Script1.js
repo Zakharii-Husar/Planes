@@ -86,7 +86,7 @@ const fullScreen = () => {
 
 
 const start = () => {
-    alert("Push \"space\" to shoot ");
+    alert("Press \"space\" to shoot and arrows to change direction.");
     theGame();
     fullScreen();
 };
